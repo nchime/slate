@@ -355,6 +355,7 @@ export class GlobalCarousel extends React.Component {
       return null;
     }
     let slide = <SlateMediaObject data={data} />;
+
     return (
       <div css={STYLES_ROOT}>
         <Alert
@@ -393,7 +394,11 @@ export class GlobalCarousel extends React.Component {
               css={STYLES_EXPANDER}
               onClick={() => this.setState({ showSidebar: !this.state.showSidebar })}
             >
-              {this.state.showSidebar ? (
+              {data.type === "application/unity" ? (
+                <div onClick={this._handleClose}>
+                  <SVG.Dismiss height="24px" />
+                </div>
+              ) : this.state.showSidebar ? (
                 <SVG.Maximize height="24px" />
               ) : (
                 <SVG.Minimize height="24px" />
@@ -405,7 +410,7 @@ export class GlobalCarousel extends React.Component {
           </div>
         </div>
         <span css={STYLES_MOBILE_HIDDEN}>
-          {this.state.carouselType === "data" ? (
+          {data.type === "application/unity" ? null : this.state.carouselType === "data" ? (
             <CarouselSidebarData
               display={this.state.showSidebar ? "block" : "none"}
               onClose={this._handleClose}
