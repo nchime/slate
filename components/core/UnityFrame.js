@@ -16,7 +16,7 @@ const loadScript = (url) =>
     script.onload = () => res(script);
   });
 
-const UnityFrame = ({ url }) => {
+const UnityFrame = ({ url, unityGameConfig }) => {
   const unityInstance = React.useRef();
   const [isLoading, setLoadingStatus] = React.useState(true);
 
@@ -39,7 +39,7 @@ const UnityFrame = ({ url }) => {
       if (window) {
         unityInstance.current = window.UnityLoader.instantiate(
           "unityContainer",
-          `${gameRootUrl}/Build/WebGL%20Repo.json`
+          `${gameRootUrl}/${unityGameConfig}`
         );
 
         setLoadingStatus(false);
